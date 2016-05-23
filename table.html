@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格操作</title>
+	<style type="text/css">
+		#tab1{border-collapse: collapse;width: 960px;margin: 50px auto;}
+		#tab1 th,#tab1 td{border: 1px solid #000;height: 20px;}
+	</style>
+	<script type="text/javascript">
+	window.onload = function () {
+		var oTab = document.getElementById('tab1');
+		var oTbody = oTab.tBodies[0];
+
+		var data = [
+			{'id':1,'usename':'aaa','sex':'男'},
+			{'id':2,'usename':'bbb','sex':'女'},
+			{'id':3,'usename':'ccc','sex':'男'},
+			{'id':4,'usename':'ddd','sex':'女'}
+		];
+
+		for (var i = 0; i < data.length; i++) {
+
+			var oTr = document.createElement('tr');
+
+			var oTd = document.createElement('td');
+			oTd.innerHTML = data[i].id;
+			oTr.appendChild( oTd );
+
+			if (i % 2 == 0) {
+				oTr.style.background = '#ABEAB3';	
+			}else{
+				oTr.style.background = '#2FED48';
+			}
+			
+			oTd = document.createElement('td');
+			oTd.innerHTML = data[i].usename;
+			oTr.appendChild( oTd );
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = data[i].sex;
+			oTr.appendChild( oTd );
+
+			oTd = document.createElement('td');
+			oTd.innerHTML = '&nbsp;';
+			var oLink = document.createElement('a');
+			oLink.innerHTML = '删除';
+			oLink.href = 'javascript:;';
+			oTd.appendChild( oLink );
+			oTr.appendChild( oTd );
+
+			oTbody.appendChild( oTr );
+			oLink.onclick = function() {
+				oTbody.removeChild( this.parentNode.parentNode );
+				for (var i = 0; i < oTbody.rows.length; i++) {
+					if (!(i%2)) {
+						oTbody.rows[i].style.background = '#ABEAB3';
+					}else{
+						oTbody.rows[i].style.background = '#2FED48';
+					}
+				}
+			}
+		}
+
+	}
+	</script>
+</head>
+<body>
+	<table id="tab1">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+</body>
+</html>
