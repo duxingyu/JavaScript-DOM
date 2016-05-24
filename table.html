@@ -4,20 +4,23 @@
 	<meta charset="UTF-8">
 	<title>表格操作</title>
 	<style type="text/css">
-		#tab1{border-collapse: collapse;width: 960px;margin: 50px auto;}
+		#tab1{border-collapse: collapse;width: 960px;margin: 50px 0;}
 		#tab1 th,#tab1 td{border: 1px solid #000;height: 20px;}
 	</style>
 	<script type="text/javascript">
 	window.onload = function () {
 		var oTab = document.getElementById('tab1');
 		var oTbody = oTab.tBodies[0];
-
-		var data = [
+		var oldColor = '';
+		var oForm = document.getElementById('form1');
+		var id = null;
+		//数据：动态添加
+		var data = [				
 			{'id':1,'usename':'aaa','sex':'男'},
 			{'id':2,'usename':'bbb','sex':'女'},
 			{'id':3,'usename':'ccc','sex':'男'},
 			{'id':4,'usename':'ddd','sex':'女'}
-		];
+		];			
 
 		for (var i = 0; i < data.length; i++) {
 
@@ -32,7 +35,15 @@
 			}else{
 				oTr.style.background = '#2FED48';
 			}
-			
+			//移入移出变色///
+			oTr.onmouseover = function () {
+				oldColor = this.style.background;
+				this.style.background = '#ccc';
+			}
+			oTr.onmouseout = function () {
+				this.style.background = oldColor;
+			}
+			///////////////
 			oTd = document.createElement('td');
 			oTd.innerHTML = data[i].usename;
 			oTr.appendChild( oTd );
@@ -42,7 +53,6 @@
 			oTr.appendChild( oTd );
 
 			oTd = document.createElement('td');
-			oTd.innerHTML = '&nbsp;';
 			var oLink = document.createElement('a');
 			oLink.innerHTML = '删除';
 			oLink.href = 'javascript:;';
@@ -50,6 +60,7 @@
 			oTr.appendChild( oTd );
 
 			oTbody.appendChild( oTr );
+			//删除一行，隔行变色
 			oLink.onclick = function() {
 				oTbody.removeChild( this.parentNode.parentNode );
 				for (var i = 0; i < oTbody.rows.length; i++) {
@@ -60,12 +71,64 @@
 					}
 				}
 			}
+
 		}
 
+		id = oTbody.rows.length + 1;
+		//添加新行
+		oForm.add.onclick = function () {
+			var ooTr = document.createElement('tr');
+			var ooTd = document.createElement('td');
+			ooTd.innerHTML = id++;
+			ooTr.appendChild(ooTd);
+
+			ooTd = document.createElement('td');
+			ooTd.innerHTML = oForm.name.value;
+			ooTr.appendChild(ooTd);
+
+			ooTd = document.createElement('td');
+			ooTd.innerHTML = oForm.sex.value;
+			ooTr.appendChild(ooTd);
+
+			ooTd = document.createElement('td');
+			ooLink = document.createElement('a');
+			ooLink.innerHTML = '删除';
+			ooLink.href = 'javascript:;';
+			ooTd.appendChild(ooLink);
+			ooTr.appendChild(ooTd);
+			oTbody.appendChild(ooTr);
+			//删除新行
+			ooLink.onclick = function () {
+				oTbody.removeChild(this.parentNode.parentNode);
+			}
+		}
+		//搜索：模糊搜索，多关键词搜索
+		oForm.search.onclick = function () {
+			for (var i = 0; i < oTbody.rows.length; i++) {
+				var sTab = oTbody.rows[i].cells[1].innerHTML.toLowerCase();
+				var sName = oForm.name.value.toLowerCase();
+				var arr = sName.split(' ');
+				// oTbody.rows[i].style.background = '';				//高亮显示
+				oTbody.rows[i].style.display = 'none';					//筛选
+				for (var j = 0; j < arr.length; j++) {
+					if (sTab.search(arr[j]) != -1) {					//同 sTab.indexOf(sName) != -1
+						// oTbody.rows[i].style.background = 'yellow';	//高亮显示
+						oTbody.rows[i].style.display = 'block';			//筛选
+					}
+				}
+				
+			}
+		}
 	}
 	</script>
 </head>
 <body>
+	<form id="form1">
+		姓名：<input type="text" name="name">
+		性别：<input type="text" name="sex">
+		<input type="button" name="add" value="添加">
+		<input type="button" name="search" value="搜索">
+	</form>
 	<table id="tab1">
 		<thead>
 			<tr>
