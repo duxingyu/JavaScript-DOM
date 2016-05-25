@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>回到顶部实例</title>
+	<style type="text/css">
+		#div1{width: 50px;height: 50px;background: #f60;position: absolute;display: none;}
+	</style>
+	<script type="text/javascript">
+	window.onload = function () {
+		var oDiv = document.getElementById('div1');
+
+		oDiv.style.left = document.documentElement.clientWidth - 60 + 'px';//初始化
+
+		window.onresize = function () {
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			if (oDiv.style.display == 'none') return;
+			oDiv.style.left = document.documentElement.clientWidth - 60 + 'px';
+			oDiv.style.top = document.documentElement.clientHeight + scrollTop - 60 + 'px';		//当size改变时top也会变
+		}
+		window.onscroll = function () {
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+			if (scrollTop + document.documentElement.clientHeight > 1000) {
+				oDiv.style.display = 'block';	
+				oDiv.style.top = document.documentElement.clientHeight + scrollTop - 60 + 'px';
+			}else{
+				oDiv.style.display = 'none';
+			}	
+		}
+		oDiv.onclick = function () {
+			document.documentElement.scrollTop ? document.documentElement.scrollTop = 0 : document.body.scrollTop = 0;	
+		}
+	}
+	</script>
+</head>
+<body style="height: 5000px;">
+	<div id="div1"></div>
+</body>
+</html>

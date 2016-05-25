@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>留言限制及批量删除</title>
+	<style type="text/css">
+		#list li{cursor: pointer;}
+	</style>
+	<script type="text/javascript">
+	window.onload = function () {
+		var oForm = document.getElementById('form1');
+		var oUl = document.getElementById('list');
+		var onOff = true;
+
+		oForm.add.onclick = function () {
+
+			var aLi = document.createElement('li');
+			aLi.innerHTML = oForm.txt.value;
+			if (oUl.children[0]) {
+				oUl.insertBefore(aLi,oUl.children[0]);
+			}else{
+				oUl.appendChild(aLi);
+			}
+			oForm.txt.value = '';
+			if (oUl.children.length > 5) {
+				oUl.removeChild(oUl.lastElementChild || oUl.lastChild);
+			}
+
+			aLi.onclick = function () {
+				if (onOff) {
+					this.style.background = 'yellow';
+					onOff = false;
+				}else{
+					this.style.background = '';
+					onOff = true;
+				}
+			}
+
+			oForm.delete.onclick = function () {
+				for (var i = 0; i < oUl.children.length; ) {
+					//注意：当删除第i个时应继续从i开始循环不进行i++操作
+					oUl.children[i].style.background == 'yellow' ? oUl.removeChild(oUl.children[i]) : i++;
+				}
+
+			}
+		}
+	}
+	</script>
+</head>
+<body>
+	<form id="form1">
+		<input type="text" name="txt">
+		<input type="button" name="add" value="发表">
+		<input type="button" name="delete" value="批量删除">
+	</form>
+	<ul id="list"></ul>
+</body>
+</html>
