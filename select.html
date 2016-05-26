@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select</title>
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<style type="text/css">
+		body{margin: 50px;}
+		#div1{width: 200px;height: 30px;border: 1px solid #f60;line-height: 30px;text-indent: 30px;}
+		#list{border: 1px solid #f60;border-top: none;width: 200px;display: none;}
+		#list li{height: 30px;line-height: 30px;text-indent: 30px;}
+		.selected{background: #f60;}
+	</style>
+	<script type="text/javascript">
+	window.onload = function () {
+		var oDiv = document.getElementById('div1');
+		var oUl = document.getElementById('list');
+		var aLi = document.getElementsByTagName('li');
+		var old = undefined;
+
+		oDiv.onclick = function (ev) {
+			oUl.style.display = 'block';
+			var ev = ev || event;
+			ev.cancelBubble = true;
+		}
+
+		document.onclick = function () {
+			oUl.style.display = 'none';
+		}
+
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].onmouseover = function () {
+				this.style.background = '#f60';
+			}
+			aLi[i].onmouseout = function () {
+				if (this.className == 'selected') {
+					this.style.background = '#f60';
+				}else{
+					this.style.background = '#fff';
+				}	
+			}
+			aLi[i].onclick = function () {
+				for (var j = 0; j < aLi.length; j++) {
+					aLi[j].className = '';
+					aLi[j].style.background = '#fff';
+				}
+				oDiv.innerHTML = '';
+				oDiv.innerHTML = this.innerHTML;
+				this.className = 'selected';
+				old = this;
+			}
+		}
+	}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<ul id="list">
+		<li>宋体</li>
+		<li>黑体</li>
+		<li>楷书</li>
+		<li>微软雅黑</li>
+		<li>仿宋</li>
+	</ul>
+</body>
+</html>

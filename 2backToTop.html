@@ -2,21 +2,35 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>回到顶部实例</title>
+	<title>回到顶部、左右广告</title>
 	<style type="text/css">
 		#div1{width: 50px;height: 50px;background: #f60;position: absolute;display: none;}
+		#leftAd{width: 100px;height: 200px;background: red;position: absolute;left: 0;}
+		#leftAd a{font-size: 12px;position: absolute;top: -12px;right: -12px;display: block;color: #000;}
+		#rightAd{width: 100px;height: 200px;background: red;position: absolute;right: 0;}
 	</style>
 	<script type="text/javascript">
 	window.onload = function () {
 		var oDiv = document.getElementById('div1');
+		var oLeft = document.getElementById('leftAd');
+		var oRight = document.getElementById('rightAd');
+		var aLink = document.getElementsByTagName('a');
 
 		oDiv.style.left = document.documentElement.clientWidth - 60 + 'px';//初始化
+		oLeft.style.top = (document.documentElement.clientHeight - 200)/2 + 'px';
+		oRight.style.top = (document.documentElement.clientHeight - 200)/2 + 'px';
+
+		aLink[0].onclick = function () {
+			oLeft.style.display = 'none';
+		}
 
 		window.onresize = function () {
 			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 			if (oDiv.style.display == 'none') return;
 			oDiv.style.left = document.documentElement.clientWidth - 60 + 'px';
 			oDiv.style.top = document.documentElement.clientHeight + scrollTop - 60 + 'px';		//当size改变时top也会变
+			oLeft.style.top = (document.documentElement.clientHeight - 200)/2 + scrollTop + 'px';
+			oRight.style.top = (document.documentElement.clientHeight - 200)/2 + scrollTop + 'px';
 		}
 		window.onscroll = function () {
 			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -27,6 +41,8 @@
 			}else{
 				oDiv.style.display = 'none';
 			}	
+			oLeft.style.top = (document.documentElement.clientHeight - 200)/2 + scrollTop + 'px';
+			oRight.style.top = (document.documentElement.clientHeight - 200)/2 + scrollTop + 'px';
 		}
 		oDiv.onclick = function () {
 			document.documentElement.scrollTop ? document.documentElement.scrollTop = 0 : document.body.scrollTop = 0;	
@@ -36,5 +52,7 @@
 </head>
 <body style="height: 5000px;">
 	<div id="div1"></div>
+	<div id="leftAd"><a href="javascript:;">关闭</a></div>
+	<div id="rightAd"></div>
 </body>
 </html>

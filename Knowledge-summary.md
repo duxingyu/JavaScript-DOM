@@ -103,11 +103,53 @@ document.documentElement.offsetHeight   //兼容性问题：IE为可视高度
 document.body.offsetHeight      //无问题，推荐使用          
 5.onscroll,onresize             //根据时间触发
 ```
-
-## 3、Event 事件详解1
-## 4、Event 事件详解2
-## 5、事件深入应用
-## 6、鼠标滚轮、COOKIE
+## 3、Event 事件
+#### **1、焦点事件**
+`元素.onfocus`----`obj.focus()`
+`元素.onblur`----`obj.blur()`
+`oText.select()`
+#### **2、event事件对象**
+```javascript
+//event-在事件函数中调用
+//ie/chrome:event为一个内置全局对象
+//ff:通过事件函数第一个参数传入
+function fn1(ev){
+    var ev = ev || event;
+    ev.clientX/clientY;
+}
+onmousemove //时间
+```
+#### **3、事件流**
+```javascript
+1.事件冒泡：实例：分享到、仿select
+阻止冒泡：event.cancelBubble = true;
+2.事件绑定：
+//ie:obj.attachEvent(事件名称,函数);
+obj.attachEvent('onclick',fn1);
+//this指向window       非标准：倒序执行
+//标准:obj.addEventListener(事件名称，函数，是否捕获);
+obj.addEventListener('click',fn1,true);
+是否捕获：默认为false.
+false:冒泡；        //出去
+true:捕获。         //进来
+3.fn1.call()方法：
+参数1可改变内部this指向，之后为原参数列表
+4.事件函数的取消：
+第一种：document.onclick = null;
+第二种：document.detachEvent('onclick',fn1);
+document.removeEventListener('click',fn1,false/true);
+5.事件默认行为的阻止：return false;
+6.右键菜单事件：document.oncontextmenu;
+```
+#### **4、键盘事件**
+```javascript
+onkeydown onkeyup
+event.keyCode:数字类型 键值
+ctrlKey,shiftKey,altKey     //boolean 事件发生时按下返回true
+event.ctrlKey
+```
+## 4、事件深入应用
+## 5、鼠标滚轮、COOKIE
 
 
 
