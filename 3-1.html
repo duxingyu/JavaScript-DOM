@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标绘制方块</title>
+	<style type="text/css">
+		#area{width: 500px;height: 500px;border: 1px solid #000;margin: 50px auto;}
+		#area div{border: 1px solid #f60;position: absolute;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var oArea = document.getElementById('area');
+
+			oArea.onmousedown = function (ev) {
+				var ev = ev || event;
+				var aDiv = document.createElement('div');
+				var disX = ev.clientX;
+				var disY = ev.clientY;
+				aDiv.style.left = disX  + 'px';
+				aDiv.style.top = disY  + 'px';
+				oArea.appendChild( aDiv );
+
+				if (oArea.setCapture) oArea.setCapture();
+				document.onmousemove = function (ev) {
+					var ev = ev || event;
+					if (ev.clientX > disX) {
+						aDiv.style.width = ev.clientX - disX + 'px';
+						aDiv.style.height = ev.clientY - disY + 'px';
+					}else{
+						aDiv.style.width = disX - ev.clientX + 'px';
+						aDiv.style.height = disY - ev.clientY + 'px';
+						aDiv.style.left = ev.clientX + 'px';
+						aDiv.style.top = ev.clientY + 'px';
+					}
+
+				}
+				document.onmouseup = function () {
+					document.onmousemove = document.onmousedown = null;
+					if (oArea.releaseCapture) oArea.releaseCapture();	
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="area"></div>	
+</body>
+</html>
