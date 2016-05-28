@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义滚动条</title>
+	<style type="text/css">
+		#wrap1{width: 20px;height: 500px;background: #000;position: relative;margin: 10px;}
+		#scroll{width: 20px;/*height: 20px;*/background: #f60;position: absolute;top: 0;left: 0;}
+		#wrap2{width: 500px;height: 500px;border: 1px solid #000;position: absolute;top: 10px;left: 50px;overflow: hidden;}
+		#content{position: absolute;top: 0;left: 0;padding: 10px;font-size: 16px;line-height: 24px;font-family: "微软雅黑"}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var oWrap1 = document.getElementById('wrap1');
+			var oWrap2 = document.getElementById('wrap2');
+			var oScr = document.getElementById('scroll');
+			var oCon = document.getElementById('content');
+			var dis1 = null;
+			var dis2 = oWrap2.offsetHeight - oCon.offsetHeight;
+
+			if (dis2 > 0) {
+				oWrap1.style.display = 'none';
+				// oScr.style.height = oWrap1.offsetHeight + 'px';
+			}else{
+				//oScr.style.height中的oWrap1.offsetHeight 可设置为也其他值
+				oScr.style.height = (oWrap2.offsetHeight/oCon.offsetHeight) * oWrap1.offsetHeight + 'px';
+				dis1 = oWrap1.offsetHeight - oScr.offsetHeight;
+			}
+
+			oScr.onmousedown = function (ev) {
+				var ev = ev || event;
+				var disY = ev.clientY - this.offsetTop;
+				if (oScr.setCapture) oScr.setCapture();
+				document.onmousemove = function (ev) {
+					var ev = ev || event;
+					var L = ev.clientY - disY;
+					if (L < 0) {
+						L = 0;
+					}else if(L > dis1){
+						L = dis1;
+					}
+					oScr.style.top = L + 'px';
+					var scale = L / dis1;
+					oCon.style.top = dis2 * scale + 'px';
+					
+				}
+				document.onmouseup = function () {
+					document.onmousemove = document.onmousedown = null;
+					if (oScr.releaseCapture) oScr.releaseCapture();
+				}
+				return false;
+			}
+			//鼠标滚轮效果
+			// oCon.onmousewheel = fn;
+			// if (oCon.addEventListener) {
+			// 	oCon.addEventListener('DOMMouseScroll',fn,false);
+			// }
+			// function fn(ev) {
+			// 	var ev = ev || event;
+			// 	var b = true;
+			// 	if (ev.wheelDelta) {
+			// 		b = ev.wheelDelta > 0 ? true : false;
+			// 	}else{
+			// 		b = ev.detail < 0 ? true : false;
+			// 	}
+
+			// 	if (b) {		
+			// 		this.style.top = T + 50 + 'px';
+			// 	}else if(!b){
+			// 		this.style.top = T - 50 + 'px';
+			// 	}
+			// 	if (ev.preventDefault) ev.preventDefault();
+			// 	return false;
+			// }
+		}
+	</script>
+</head>
+<body style="height: 2000px;">
+	<div id="wrap1">
+		<div id="scroll"></div>
+	</div>
+	<div id="wrap2">
+		<div id="content">
+			黄河新闻网晋城讯为认真学习贯彻王儒林书记在晋城调研时的重要讲话精神，认真落实刘杰副省长关于打黑除恶的重要批示指示精神，深入贯彻5月26日全市领导干部大会精神和张九萍书记、刘润民市长重要讲话精神,按照市委、市政府“讲担当、转作风、抓落实”活动的部署要求，深入分析打黑除恶面临的严峻形势，全面推进打黑除恶专项斗争深入开展，5月27日上午,晋城市召开会议，对打黑除恶专项斗争进行再动员、再部署。
+2015年以来，全市公安机关在市委、市政府和省公安厅的正确领导下，与法院、检察、司法等部门密切配合，扎实开展了打黑除恶专项斗争，共打掉恶势力犯罪团伙18个，抓获团伙成员147名，破获各类刑事案件263起，有力地震慑了黑恶犯罪的嚣张气焰。会议深入分析了当前黑恶犯罪呈现出一些新的特点，要求打黑除恶工作要坚持问题导向，深入查找打黑除恶专项斗争中存在的问题和不足，并采取有力举措，进一步推进打黑除恶专项斗争深入开展。
+会议通报了晋城监狱刑满释放人员程幼泽聚众扰乱公共场所秩序案。晋城监狱刑满释放人员程幼泽、绰号“程三”，先后三次被判处有期徒刑。在5月23日释放当天，100余名社会闲杂人员在监区外列队聚集、燃放鞭炮，摆宴聚餐，聚众扰乱公共场所秩序。案件发生后，省公安厅高度重视，专门委派刑侦总队领导和专家指导案件侦破工作，市公安局立即成立“5.23”专案组，抽调精兵强将展开侦查，迅速查明了程幼泽等人聚众扰乱公共场所秩序的犯罪事实，5月26日，依法将犯罪嫌疑人程幼泽刑事拘留，同时抓获了9名违法犯罪嫌疑人。目前，案件正在依法侦办中，公安机关将深挖细查、一查到底，绝不能让犯罪分子气焰甚嚣尘上，绝不能让社会渣滓沉渣泛起。
+今年是全省打黑除恶专项斗争专项斗争深化年。全市打黑除恶工作将准确把握黑恶犯罪形势、规律和特点，统一执法思想，贯彻严打方针，保持高压态势，坚持主动进攻，坚决做到有黑必打、有恶必除、除恶务尽，坚决给黑恶势力以毁灭性打击，切实打出声威、打出实效、打出平安。
+全市各级公安机关要充分发挥打黑除恶主力军作用，主动向党委、政府汇报，加强与有关部门的沟通联系，形成党委、政府统一领导，各部门共同参与的打黑除恶工作格局。全市公安机关将全面深入黑恶势力容易滋生的场所、行业以及治安乱点开展摸排工作,确保不漏一条线索和一起案件。为进一步加大打击力度，公安机关要在全面梳理、摸排、群众举报线索的基础上，进一步明确重点,精确打击,深挖幕后；要强化专案组织、集中攻坚；要狠抓战法创新，多措施、全方位打击黑恶犯罪。
+各级公安机关将进一步畅通群众举报渠道，严格落实实名举报奖励制度，广泛收集黑恶势力犯罪线索，坚决打赢打胜这场打黑除恶人民战争。公安机关敦促涉黑涉恶犯罪嫌疑人尽快投案自首,争取宽大处理。
+举报电话110，0356—3010136,也可登录晋城公安便民服务在线举报。
+程幼泽其人
+据山西法制报报道，2009年9月，晋城市公安局摧毁了以赵五庆赌博犯罪团伙，程幼泽即是该团伙的二号人物。
+报道称，程幼泽家居晋城，在晋城算是个名震江湖的“大哥”。蹲监狱对于他来说更是家常便饭，经过“炼狱”的洗礼，出狱后的程三，更加位高权重。据说当年这位久富恶名的程三刑满释放归来，晋城很多“江湖”人物前往迎接，并为他接风洗尘，你十万我五万上礼以供他“东山再起”。当时程幼泽收到的礼金无从考证，但程幼泽出狱后不久便坐上了一辆价值不菲的奔驰车，其在晋城“江湖”上盘根错节的关系网和影响力可见一斑。
+程幼泽早年多次被抓，出狱后又多次“东山再起”。
+山西法制报的报道称，1984年，一个恶势力团伙被公安机关打击，闪中宝、程幼泽等人分别被以流氓罪、抢劫罪判刑七年、六年。
+		</div>
+	</div>
+</body>
+</html>
