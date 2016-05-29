@@ -51,27 +51,27 @@
 				return false;
 			}
 			//鼠标滚轮效果
-			// oCon.onmousewheel = fn;
-			// if (oCon.addEventListener) {
-			// 	oCon.addEventListener('DOMMouseScroll',fn,false);
-			// }
-			// function fn(ev) {
-			// 	var ev = ev || event;
-			// 	var b = true;
-			// 	if (ev.wheelDelta) {
-			// 		b = ev.wheelDelta > 0 ? true : false;
-			// 	}else{
-			// 		b = ev.detail < 0 ? true : false;
-			// 	}
-
-			// 	if (b) {		
-			// 		this.style.top = T + 50 + 'px';
-			// 	}else if(!b){
-			// 		this.style.top = T - 50 + 'px';
-			// 	}
-			// 	if (ev.preventDefault) ev.preventDefault();
-			// 	return false;
-			// }
+			oCon.onmousewheel = fn;
+			if (oCon.addEventListener) {
+				oCon.addEventListener('DOMMouseScroll',fn,false);
+			}
+			function fn(ev) {
+				var ev = ev || event;
+				var b = true;
+				if (ev.wheelDelta) {
+					b = ev.wheelDelta > 0 ? true : false;
+				}else{
+					b = ev.detail < 0 ? true : false;
+				}
+				var T = this.offsetTop;
+				if (b && T != 0) {
+					this.style.top = T + 50 + 'px';
+				}else if(!b && T >= dis2){
+					this.style.top = T - 50 + 'px';
+				}
+				if (ev.preventDefault) ev.preventDefault();
+				return false;
+			}
 		}
 	</script>
 </head>

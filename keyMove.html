@@ -23,23 +23,27 @@ window.onload = function() {
 		
 		switch(ev.keyCode) {
 			case 37:
+				clearInterval(timer);
 				timer = setInterval(function () {
 					oDiv.style.left = oDiv.offsetLeft - 10 + 'px';
 				},20);
 				
 				break;
 			case 38:
+			clearInterval(timer);
 				timer = setInterval(function () {
 					oDiv.style.top = oDiv.offsetTop - 10 + 'px';
 				},20);
 				
 				break;
 			case 39:
+				clearInterval(timer);
 				timer = setInterval(function () {
 					oDiv.style.left = oDiv.offsetLeft + 10 + 'px';
 				},20);
 				break;
 			case 40:
+				clearInterval(timer);
 				timer = setInterval(function () {
 					oDiv.style.top = oDiv.offsetTop + 10 + 'px';
 				},20);
