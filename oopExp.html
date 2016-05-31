@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象选项卡</title>
+	<style type="text/css">
+		#div1 input{background: #fff;}
+		#div1 input.active{background: #f60;}
+		#div1 div{width: 100px;height: 100px;background: #ccc;display: none;margin: 10px;}
+	</style>
+	<script type="text/javascript">
+	// window.onload = function () {
+	// 	var oDiv = document.getElementById('div1');
+	// 	var aInput = oDiv.getElementsByTagName('input');
+	// 	var aDiv = oDiv.getElementsByTagName('div');
+
+	// 	for (var i = 0; i < aInput.length; i++) {
+
+	// 		aInput[i].index = i;
+	// 		aInput[i].onclick = function(){
+	// 			for (var i = 0; i < aInput.length; i++) {
+	// 				aInput[i].className = '';
+	// 				aDiv[i].style.display = 'none';
+	// 			}
+	// 			this.className = 'active';
+	// 			aDiv[this.index].style.display = 'block';
+	// 		};
+	// 	}
+	// }
+
+	function TabSwitch(id){
+		var that = this;
+		var oDiv = document.getElementById(id);
+		this.aInput = oDiv.getElementsByTagName('input');
+		this.aDiv = oDiv.getElementsByTagName('div');
+		
+
+		for (var i = 0; i < this.aInput.length; i++) {
+			this.aInput[i].index = i;
+			this.aInput[i].onclick = function(){
+				that.switch(this);
+			};
+		}
+	}
+	TabSwitch.prototype.switch = function(oInput) {
+		alert(this)
+		for (var i = 0; i < this.aInput.length; i++) {
+			this.aInput[i].className = '';
+			this.aDiv[i].style.display = 'none';
+		}
+		oInput.className = 'active';
+		this.aDiv[oInput.index].style.display = 'block';
+	};
+	window.onload = function(){
+		var a1 = new TabSwitch('div1');
+	};
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<input type="button" value="选项1" class="active">
+		<input type="button" value="选项2">
+		<input type="button" value="选项3">
+		<div style="display: block;">选项1</div>
+		<div>选项2</div>
+		<div>选项3</div>
+	</div>
+</body>
+</html>
