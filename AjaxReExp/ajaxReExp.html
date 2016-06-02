@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax\正则实践</title>
+	<style type="text/css">
+		div{border:2px solid #ccc;padding: 10px;margin: 10px;font-family: "微软雅黑";font-size: 16px;font-weight: bold;/*word-spacing: 100px;*/}
+		span{display:inline-block;width: 200px;border: 1px solid #f60;line-height: 24px;}
+	</style>
+	<script src="ajax.js"></script>
+	<script type="text/javascript">
+	window.onload = function(){
+		var aBtn = document.getElementsByTagName('input');
+		var oBody = document.getElementById('body');
+		var aP = oBody.getElementsByTagName('p');
+		var random = false;
+		aBtn[0].onclick = function(){
+			ajax('add.txt?t='+new Date().getTime(),function(str){
+				var re = /@[a-z]+@/g;
+				var oP = document.createElement('p');
+				oP.innerHTML = str;
+				var arr = [];
+				arr.push(oP.innerHTML.match(re));
+				oP.innerHTML = arr[0];
+				arr = oP.innerHTML.split('@').join('').split(',');
+				oP.innerHTML = arr;
+				body.appendChild(oP);
+				oP.style.display = 'none';
+			},function(){alert('错误')});
+		}
+		aBtn[1].onclick = function(){
+			ajax('four.txt?t='+new Date().getTime(),function(str){
+				var re = /[a-z]+\ /g;
+				var oP = document.createElement('p');
+				oP.innerHTML = str;
+				var arr = [];
+				arr.push(oP.innerHTML.match(re));
+				oP.innerHTML = arr[0];
+				arr = oP.innerHTML.split(' ,');
+				oP.innerHTML = arr;
+				body.appendChild(oP);
+				oP.style.display = 'none';
+			},function(){alert('错误')});
+		}
+		aBtn[2].onclick = function(){
+			displayWord(false);
+		}
+		aBtn[3].onclick = function(){
+			displayWord(true);
+		}
+		aBtn[4].onclick = function(){random == true ? random = false:random = true;}
+		function displayWord(onOff){
+			var arr1 = aP[0].innerHTML.split(',');
+			var arr2 = aP[1].innerHTML.split(',');
+			var arr3 =[];
+			var strx = '';
+			var num = 1;
+			for (var i = 0; i < arr1.length; i++) {
+				for (var j = 0; j < arr2.length; j++) {
+					if (arr1[i] == arr2[j]) {
+	            		arr3.push(arr1[i]);
+						arr1.splice(i,1);
+					}
+				}
+			}
+			if (onOff) {arr3 = arr1};
+			if (random) {arr3.sort(function(a,b){return Math.random() - 0.5;});}
+			for (var i = 0; i < arr3.length; i++) {
+				strx += '<span>'+num+'、'+arr3[i]+'</span>';
+				num++;
+			}
+			var oDiv = document.createElement('div');
+			// oDiv.innerHTML = arr3.join(' ');
+			oDiv.innerHTML = strx;num = 1;
+			body.appendChild(oDiv);
+		}
+
+	};
+	</script>
+</head>
+<body id="body">
+	<input type="button" value="添加文件">
+	<input type="button" name="" value="添加四级文件">
+	<input type="button" name="" value="大纲词汇">
+	<input type="button" value="超纲词汇" name="">
+	<input type="button" value="乱序" name="">
+</body>
+</html>
