@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>最佳实践</title>
+	<style type="text/css">
+		a {text-decoration: none;color: #f60;font-size: 20px;font-family: "微软雅黑";}
+	</style>
+	<script type="text/javascript">
+	window.onload = function (){
+		var aLink = document.getElementsByTagName('a');
+		for (var i = 0; i < aLink.length; i++) {
+			if (aLink[i].className == 'target') {
+				aLink[i].onclick = function(){
+					popUp(this.href);
+					return false;
+				};
+			}
+		}
+	};
+	function popUp (url){
+		window.open(url,'popUp','width=300,height=400');
+	}
+	</script>
+</head>
+<body>
+	<a href="http://www.baidu.com" alt="no!" class="target">指向->百度</a><br>
+	<a href="http://www.qq.com" alt="no!" class="target">指向->腾讯</a><br>
+	<a href="http://www.google.com" alt="no!" class="target">指向->google</a>
+</body>
+</html>
