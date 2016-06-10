@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>list2</title>
+	<style type="text/css">
+		body {font-family: "微软雅黑";}
+		ol.nav {margin: 0;padding: 0;list-style: none;}
+		ol.nav li {float: left;margin-right: 0.6em;}
+		ol.nav a {display: block;padding: 0.2em 0.5em;border: 1px solid #ccc;text-decoration: none;color: #000;}
+		ol.nav a:hover,ol.nav li.selected a {background: blue;color: #fff;}
+		ol.nav [rel='prev'],ol.nav a[rel="next"] {border: 1px solid #fff;}
+		ol.nav a[rel='prev']:before {content: "\00ab";padding-right: 0.5em;}
+		/*content的padding-left/right*/
+		ol.nav a[rel='next']:after {content: "\00bb";padding-left: 0.5em;}
+		ol.nav li:first-child a {color: #f60;}
+	</style>
+</head>
+<body>
+	<ol class="nav">
+		<li><a href="" rel="prev">上一页</a></li>
+		<li><a href="">1</a></li>
+		<li><a href="">2</a></li>
+		<li class="selected"><a href="">3</a></li>
+		<li><a href="">4</a></li>
+		<li><a href="">5</a></li>
+		<li><a href="" rel="next">下一页</a></li>
+	</ol>	
+</body>
+</html>
