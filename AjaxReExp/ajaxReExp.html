@@ -30,13 +30,15 @@
 		}
 		aBtn[1].onclick = function(){
 			ajax('four.txt?t='+new Date().getTime(),function(str){
-				var re = /[a-z]+\ /g;
+				// var re = /[a-z]+\ /g;
+				var re1 = /^[a-z]+[\u4e00-\u9fa5]$/g;
 				var oP = document.createElement('p');
 				oP.innerHTML = str;
 				var arr = [];
-				arr.push(oP.innerHTML.match(re));
+				// arr.push(oP.innerHTML.match(re));
+				arr.push(oP.innerHTML.match(re1));
 				oP.innerHTML = arr[0];
-				arr = oP.innerHTML.split(' ,');
+				arr = oP.innerHTML.split(' ,');alert(arr)
 				oP.innerHTML = arr;
 				body.appendChild(oP);
 				oP.style.display = 'none';
