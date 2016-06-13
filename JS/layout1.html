@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>layout1</title>
+	<style type="text/css">
+		body {font-size: 62.5%;background: #ccc;height: 2000px;}
+		div {display: inline;}
+		div.wrap {width: 92em;margin:0 auto;overflow: hidden;display: block;}
+		div.left {width: 25%;background: #f60;height: 300px;float: left;}
+		div.right {width: 72.82%;background: #ccc;height: 300px;float: right;}
+		div.left .left {width: 59.7%;background: red;height: 300px;float: left;}
+		div.left .right {width: 34.33%;float: right;height: 300px;background: yellow;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="left">
+			<div class="left"></div>
+			<div class="right"></div>
+		</div>
+		<div class="right"></div>
+	</div>
+</body>
+</html>
