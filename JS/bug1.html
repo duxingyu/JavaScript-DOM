@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bug1</title>
+	<style type="text/css">
+		* {margin: 0;padding: 0;}
+		.d1 {width: 20px;height: 200px;background: #ccc;margin: 20px;float: left;display: inline;}
+		/* ie6 双外边距浮动bug,处理方式：display:inline; */
+		.d2 {width: 200px;float: left;background: #ccc;height: 200px;}
+		.p2 {margin-left: 200px;width: 200px;height: 300px;border: 1px solid #000;background: #f60;}
+		/* IE6 3px文本偏移bug,处理方式：float元素：margin-right:-3px;文本：margin-left:0;设置height； */		
+	</style>
+</head>
+<body>
+	<!--[if IE 6]>
+		<link rel="stylesheet" type="text/css" href="ifie6.css" />
+	<![endif]-->
+	<!-- <div class="d1"></div> -->
+	<div class="d2"></div>
+	<p class="p2"></p>
+</body>
+</html>
