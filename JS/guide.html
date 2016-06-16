@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>guide</title>
+    <style type="text/css">
+        body {
+            font: 16px/1.5 Arial, "Microsoft Yahei", sans-serif;
+            margin: 0; 
+            padding: 0;  
+        }
+        .div1,
+        .div2,
+        .div3 {
+            margin: 0;
+            padding: 0;
+        }
+        .div1 {
+            position: relative;
+            float: left;
+        }
+        .div1 > p {
+            color: #f60;
+        }
+        .div1 + div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+        input[type="text"] {
+            color: #ccc;
+        }
+        .div1 p span {
+            font-weight: 700;
+        }
+        p {
+            position: absolute;
+            background: rgba(0, 0, 0, .5);
+            line-height: 1.5;
+            -webkit-border-radius: 5px;
+               -moz-border-radius: 5px;
+                    border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <p id="eg">编写规范示例<span>HTML</span></p>
+    </div>  
+    <div class="div2">
+        
+    </div> 
+    <div class="div3"></div> 
+    <input type="text" value="实例">
+    <button type="button">不提交？</button>
+    <button type="submit">提交！</button>
+</body> 
+</html>
